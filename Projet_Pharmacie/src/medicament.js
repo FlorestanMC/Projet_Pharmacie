@@ -11,7 +11,7 @@ export class Medicament {
 
         this._photo = medicamentJSON.photo ?? "";
 
-        this._quantite = medicamentJSON.quantite;
+        this._quantite = medicamentJSON.qte;
 
 
     }
