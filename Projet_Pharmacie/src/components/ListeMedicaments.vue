@@ -10,7 +10,6 @@ const search = "?search="
 const props = defineProps(["recherche"]);
 
 const listeMedicaments = ref([]);
-const SearchedMedicaments = ref([]);
 
 function getMedicaments() {
     const fetchOptions = { method: "GET" };
@@ -32,9 +31,9 @@ function getMedicaments() {
 }
 
 watch(props, (newrecherche) => {
-
+    console.log("meow")
     getMedicaments(props);
-
+    
 })
 
 onMounted(() => {
