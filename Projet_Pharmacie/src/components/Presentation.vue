@@ -4,7 +4,7 @@
     <div id="HeaderTitle">
         <div class="title">
             <h2>Les <span>meilleurs</span> produits aux <span>meilleurs</span> prix</h2>
-            <button>C'est parti !</button>
+            <button type="button">C'est parti !</button>
         </div>
         
         <img src="../assets/Header-IMG-wBG.png" alt="">
@@ -29,6 +29,7 @@ h2 {
     display: flex;
     flex-direction: row;
     padding-inline: 10%;
+    margin-bottom: 5%;
 }
 
 #HeaderTitle img {

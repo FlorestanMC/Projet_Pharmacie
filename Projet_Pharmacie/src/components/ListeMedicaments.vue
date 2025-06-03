@@ -33,7 +33,7 @@ function getMedicaments() {
 watch(props, (newrecherche) => {
     console.log("meow")
     getMedicaments(props);
-    
+
 })
 
 onMounted(() => {
@@ -72,7 +72,10 @@ onMounted(() => {
             <div class="med-info" style="width: 100px;">
                 <p v-bind:value="medicament.id">{{ medicament.formepharmaceutique }}</p>
             </div>
-
+            <div class="med-info">
+                <button @click="$emit('eventDelete', indexChose)">Delete</button>
+                <button @click="$emit('eventFaire', indexChose)">Faire</button>
+            </div>
         </div>
     </div>
 
@@ -80,41 +83,51 @@ onMounted(() => {
 </template>
 
 <style scoped>
-
 .titre {
     display: flex;
     vertical-align: center;
+    justify-content: center;
 }
+
 .med-titre {
     margin-block: 4px;
     margin-right: 4px;
     padding-inline: 1%;
     text-align: center;
-    font-weight:initial;
+    font-weight: initial;
     font-style: italic;
-    
+
+
+
 }
+
 .med-item {
     display: flex;
     flex-direction: row;
     margin-block: 4px;
+    justify-content: center;
 }
 
 .med-info {
     padding: 1%;
     margin-right: 4px;
-    background-color: rgb(226, 226, 226);
+    background-color: rgb(235, 235, 235);
 }
 
 p {
     padding: 0;
     margin: 0;
     text-align: center;
-   
+
 }
 
 .band {
     width: 4px;
-    background-color: rgb(115, 233, 99);
+    background-color: lightcyan;
+}
+
+h2 {
+    display: flex;
+    justify-content: center;
 }
 </style>

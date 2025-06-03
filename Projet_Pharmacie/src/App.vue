@@ -24,4 +24,11 @@ function DefinirProps(r) {
 
 </template>
 
-<style scoped></style>
+<style scoped>
+main {
+  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+padding-inline: 20%;
+}
+</style>
