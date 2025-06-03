@@ -90,7 +90,9 @@ onMounted(() => {
     margin-right: 4px;
     padding-inline: 1%;
     text-align: center;
-    font-weight:500;
+    font-weight:initial;
+    font-style: italic;
+    
 }
 .med-item {
     display: flex;

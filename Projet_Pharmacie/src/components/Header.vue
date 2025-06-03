@@ -6,9 +6,8 @@ const Mrecherche = "";
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <header>
-
-        <img alt="Logo Pharmacie ISIS" class="logo" src="../assets/logoo.png" width="250" height="250" />
-        <div id="recherche" >
+        <img alt="Logo Pharmacie ISIS" class="logo" src="../assets/logoo.png" width="150" height="150" />
+        <div id="recherche">
             <p>Un médicament en tête ? </p>
             &nbsp;&nbsp;
             <form @submit.prevent="$emit('recherche', Mrecherche)">
@@ -17,15 +16,21 @@ const Mrecherche = "";
                 <i class="fa fa-search"></i>
             </form>
         </div>
-
     </header>
-    <h2>Bienvenue sur le site OFFICIEL de la pharmacie Isisienne !</h2>
 </template>
 <style scoped>
+#recherche p {
+    transform: translate(0%, -120%);
+}
+
+
+
 #recherche {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    margin-top: 50px;
+
 }
 
 form {
@@ -117,6 +122,10 @@ form:valid button {
 header {
     line-height: 1.5;
     justify-content: space-between;
+    background-color: lightcyan;
+    border-radius: 10px;
+    height: 80px;
+    padding-inline: 20px;
 }
 
 .logo {
@@ -128,7 +137,6 @@ header {
     header {
         display: flex;
         place-items: center;
-        padding-right: calc(var(--section-gap) / 2);
     }
 
     .logo {
