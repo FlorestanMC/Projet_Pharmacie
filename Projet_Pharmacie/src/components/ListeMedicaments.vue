@@ -18,12 +18,10 @@ function getMedicaments() {
             return response.json();
         })
         .then((dataJSON) => {
-            console.log(dataJSON);
             listeMedicaments.value = []
             for (let medicament of dataJSON) {
                 listeMedicaments.value.push(new Medicament(medicament));
             }
-            console.log(listeMedicaments);
         })
         .catch((error) => {
             console.log(error);
@@ -31,7 +29,6 @@ function getMedicaments() {
 }
 
 watch(props, (newrecherche) => {
-    console.log("meow")
     getMedicaments(props);
 
 })
@@ -74,7 +71,6 @@ onMounted(() => {
             </div>
             <div class="med-info">
                 <button @click="$emit('eventDelete', indexChose)">Delete</button>
-                <button @click="$emit('eventFaire', indexChose)">Faire</button>
             </div>
         </div>
     </div>

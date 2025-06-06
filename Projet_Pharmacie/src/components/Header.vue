@@ -1,5 +1,14 @@
 <script setup>
-const Mrecherche = "";
+import {RouterLink, RouterView} from 'vue-router';
+
+const emit = defineEmits(['recherche'])
+
+const Mrecherche = defineModel();
+
+function search() {
+    emit('recherche', Mrecherche.value);
+}
+
 </script>
 
 <template>
@@ -7,15 +16,18 @@ const Mrecherche = "";
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <header>
         <img alt="Logo Pharmacie ISIS" class="logo" src="../assets/logoo.png" width="150" height="150" />
+        
         <div id="recherche">
-            <p>Un médicament en tête ? </p>
-            &nbsp;&nbsp;
+            
             <form @submit.prevent="$emit('recherche', Mrecherche)">
 
                 <input type="search" v-model="Mrecherche" placeholder="Ex : Paracétamol" autofocus required>
-                <i class="fa fa-search"></i>
+                <i @click.prevent="search" class="fa fa-search"></i>
             </form>
         </div>
+        <RouterLink to="/admin">Admin</RouterLink>
+
+
     </header>
 </template>
 <style scoped>

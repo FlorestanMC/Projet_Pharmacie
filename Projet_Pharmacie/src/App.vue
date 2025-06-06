@@ -1,34 +1,11 @@
 <script setup>
-import Medicaments from "./components/Medicaments.vue";
-import Header from "./components/Header.vue";
-import Presentation from "./components/Presentation.vue";
-import { ref } from "vue";
-
-const motcle = ref("");
-
-function DefinirProps(r) {
-
-
-  motcle.value = r;
-
-}
-
+import {RouterView} from 'vue-router'
 </script>
 
 <template>
-  <Header @recherche="DefinirProps" />
-  <Presentation/>
-  <main>
-    <Medicaments :recherche="motcle" />
-  </main>
-
+  <RouterView/>
 </template>
 
 <style scoped>
-main {
-  justify-content: space-around;
-  display: flex;
-  flex-direction: column;
-padding-inline: 20%;
-}
+
 </style>
