@@ -14,13 +14,13 @@ const props = defineProps({
 
 
 let medicament = {
-  _denomination:null,
-  _formepharmaceutique:null,
-  _qte:null,
-  _photo:""
+    _denomination: null,
+    _formepharmaceutique: null,
+    _qte: null,
+    _photo: ""
 }
-if (props.medicamentactuel){
-  medicament = props.medicamentactuel
+if (props.medicamentactuel) {
+    medicament = props.medicamentactuel
 }
 
 function valider_modifier() {
@@ -30,7 +30,7 @@ function valider_modifier() {
 
 function fermer() {
     emit('fermer');
-    
+
 }
 
 
@@ -42,9 +42,9 @@ const handleFileUpload = (event) => {
     if (!file) return; // Si l'utilisateur annule la sélection du fichier, on ne fait rien
     // FileReader est un objet JavaScript permettant de lire le contenu d'un fichier 
     // de manière asynchrone.
-    const reader = new FileReader(); 
+    const reader = new FileReader();
     reader.onload = () => { // definir le traitement asynchrone du contenu du fichier
-    photo.value = reader.result // --> convertit le contenu du fichier en base64
+        photo.value = reader.result // --> convertit le contenu du fichier en base64
     };
     reader.readAsDataURL(file); // lance la lecture du fichier et donc la conversion en base64
 };
@@ -65,10 +65,9 @@ watch(() => props.medicamentactuel, (nouveau) => {
     <div v-if="ModModOn" class="modale-container">
         <div class="modale">
             <form @submit.prevent="valider_modifier">
-                <input v-model="medicament._denomination" name="_denomination" type="text"
-                    placeholder="Dénomination" />
-                <input v-model="medicament._formepharmaceutique" name="_formepharmaceutique"
-                    type="Forme Pharmaceutique" placeholder="Forme Pharmaceutique" />
+                <input v-model="medicament._denomination" name="_denomination" type="text" placeholder="Dénomination" />
+                <input v-model="medicament._formepharmaceutique" name="_formepharmaceutique" type="Forme Pharmaceutique"
+                    placeholder="Forme Pharmaceutique" />
                 <input v-model="medicament._qte" name="_qte" type="number" placeholder="Quantité" />
                 <input id="photo" @change="handleFileUpload" type="file" />
                 <p v-if="erreur" style="color:red;">Attention, il manque des informations ! &#128528</p>

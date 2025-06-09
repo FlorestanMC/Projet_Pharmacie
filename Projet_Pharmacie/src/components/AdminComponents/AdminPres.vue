@@ -8,10 +8,9 @@
             <h2><span>Admin Pannel</span></h2>
             <p><span>Ajoutez</span>, <span>Modifiez</span>, <span>Supprimez</span> ce que <span>vous</span> voulez !</p>
         </div>
-
-        
     </div>
 </template>
+
 <style scoped>
 
 .title {

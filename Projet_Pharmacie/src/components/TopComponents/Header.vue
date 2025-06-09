@@ -7,13 +7,6 @@ const montreModale = ref(false);
 
 const props = defineProps(["reinitialiserRecherche"]);
 
-watch(props, () => {
-    if (props.reinitialiserRecherche) {
-        Mrecherche.value = "";
-        emit('recherche', Mrecherche.value);
-    }
-});
-
 const Mrecherche = defineModel();
 
 const route = useRoute();
@@ -39,6 +32,13 @@ function AccueilOuAdmin() {
     }
 }
 
+watch(props, () => {
+    if (props.reinitialiserRecherche) {
+        Mrecherche.value = "";
+        emit('recherche', Mrecherche.value);
+    }
+});
+
 </script>
 
 <template>
@@ -57,6 +57,7 @@ function AccueilOuAdmin() {
     </header>
     <ModaleConnexion :ModConOn="montreModale" @succes="goAdmin" @fermer="montreModale = false" />
 </template>
+
 <style scoped>
 #recherche p {
     transform: translate(0%, -120%);

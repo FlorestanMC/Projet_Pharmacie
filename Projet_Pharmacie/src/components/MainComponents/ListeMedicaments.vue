@@ -4,17 +4,19 @@ import { onMounted, onBeforeUnmount, ref, watch, defineEmits } from "vue";
 
 const url = "https://apipharmacie.pecatte.fr/api/11/medicaments";
 
-const search = "?search="
-
-const props = defineProps(["recherche"],['reinitialiserRecherche']);
-
-const emit = defineEmits(['reinitialiserRecherche']);
-
 const photourl = "https://apipharmacie.pecatte.fr/images/";
+
+const search = "?search="
 
 const listeMedicaments = ref([]);
 
 const BackToTop = ref(false);
+
+const props = defineProps(["recherche"], ['reinitialiserRecherche']);
+
+const emit = defineEmits(['reinitialiserRecherche']);
+
+
 
 function getMedicaments() {
     const fetchOptions = { method: "GET" };
@@ -33,7 +35,6 @@ function getMedicaments() {
         });
 }
 
-
 function checkScroll() {
     BackToTop.value = window.scrollY > 100;
 
@@ -47,7 +48,7 @@ function resetRecherche() {
     emit('reinitialiserRecherche');
     getMedicaments();
     scrollAuTop();
-}   
+}
 
 watch(props, () => {
     getMedicaments(props);
@@ -103,7 +104,7 @@ onBeforeUnmount(() => {
                 <div class="med-infost">
                     <p v-bind:value="medicament.id">{{ medicament.denomination }}</p>
                 </div>
-                <div class="med-info" >
+                <div class="med-info">
                     <p v-bind:value="medicament.id">{{ medicament.qte }}</p>
                 </div>
                 <div class="med-info">
@@ -123,7 +124,6 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
-
 .reset {
     cursor: pointer;
     display: flex;

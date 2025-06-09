@@ -123,8 +123,8 @@ function modifierMedicament(medicament) {
 }
 
 function Ajouter1(medicament) {
-     let newmedicament = { id: medicament._id, denomination: medicament._denomination, formepharmaceutique: medicament._formepharmaceutique, qte: medicament._qte }
-    
+    let newmedicament = { id: medicament._id, denomination: medicament._denomination, formepharmaceutique: medicament._formepharmaceutique, qte: medicament._qte }
+
     if (medicament._qte < 0) {
         newmedicament.qte = 1;
     }
@@ -154,8 +154,8 @@ function Ajouter1(medicament) {
 
 function Enlever1(medicament) {
     console.log(medicament);;
-    
-     let newmedicament = { id: medicament._id, denomination: medicament._denomination, formepharmaceutique: medicament._formepharmaceutique, qte: medicament._qte }
+
+    let newmedicament = { id: medicament._id, denomination: medicament._denomination, formepharmaceutique: medicament._formepharmaceutique, qte: medicament._qte }
     if (medicament._qte < 2) {
         newmedicament.qte = 1;
     }
@@ -256,7 +256,7 @@ onBeforeUnmount(() => {
         <div v-if="listeMedicaments.length === 0">
             <br><br>
             <p>Aucun médicament n'a été trouvé...</p>
-            <p  class="reset" @click="resetRecherche">Réinitialiser la recherche ?</p>
+            <p class="reset" @click="resetRecherche">Réinitialiser la recherche ?</p>
             <br><br>
         </div>
         <div v-else>
@@ -291,8 +291,8 @@ onBeforeUnmount(() => {
 
     </div>
 
-    <ModaleModifier :medicamentactuel="medicamentactuel" :ModModOn="montreModaleModif" @valider_modifier="modifierMedicament"
-        @fermer="montreModaleModif = false" />
+    <ModaleModifier :medicamentactuel="medicamentactuel" :ModModOn="montreModaleModif"
+        @valider_modifier="modifierMedicament" @fermer="montreModaleModif = false" />
     <ModaleAjouter :ModAjOn="montreModaleAjout" @valider_ajouter="ajouterMedicament"
         @fermer="montreModaleAjout = false" />
     <button v-show="BackToTop" @click="scrollAuTop" class="back-to-top" aria-label="Revenir en haut"> ▲ </button>
@@ -300,7 +300,6 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
-
 .reset {
     cursor: pointer;
     display: flex;

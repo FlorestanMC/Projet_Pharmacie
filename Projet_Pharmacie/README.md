@@ -1,29 +1,32 @@
-# Projet_Pharmacie
+Bienvenue sur la Pharmacie Isisienne, la plateforme qui recense les meilleurs produits pharmaceutiques au meilleur prix.
 
-This template should help get you started developing with Vue 3 in Vite.
+https://forthebadge.com/images/badges/contains-cat-gifs.svg https://forthebadge.com/images/badges/contains-cat-gifs.svg https://forthebadge.com/images/badges/contains-cat-gifs.svg
 
-## Recommended IDE Setup
+🚀 Fonctionnalités
+Header
+Barre de recherche interactive
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+S’affiche de façon élégante au survol dans le header.
+Recherche envoyée au clavier (Entrée) ou en cliquant sur la loupe.
+Défilement smooth vers la liste des résultats après une recherche.
+Accès Admin sécurisé
 
-## Customize configuration
+Un bouton dédié ouvre une modale de connexion Admin.
+Indication claire en cas de mauvais mot de passe.
+Redirection vers l’Espace Admin après validation.
+Présentation rapide du site juste sous le header.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+Main : Liste des médicaments
+Affichage de la liste avec données récupérées via API :
 
-## Project Setup
+Dénomination
+Quantité
+Forme
+Image
+Gestion de la recherche
 
-```sh
-npm install
-```
+Aucun résultat ? Un message adapté s’affiche + bouton pour réinitialiser la recherche.
+Navigation améliorée
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+Une petite flèche flottante apparaît dès que l’on scrolle suffisamment : cliquez pour remonter en haut de la page !
+🖼️ Aperçu en images
