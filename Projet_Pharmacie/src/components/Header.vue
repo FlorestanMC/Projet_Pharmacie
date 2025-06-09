@@ -1,12 +1,34 @@
 <script setup>
-import {RouterLink, RouterView} from 'vue-router';
+import { RouterLink, useRoute, useRouter } from 'vue-router';
+import { ref } from 'vue';
+import ModaleConnexion from '../components/ModaleConnexion.vue'
 
-const emit = defineEmits(['recherche'])
+const montreModale = ref(false);
 
 const Mrecherche = defineModel();
 
-function search() {
+const route = useRoute();
+
+const router = useRouter();
+
+const emit = defineEmits(['recherche'])
+
+
+function recherche() {
     emit('recherche', Mrecherche.value);
+}
+
+function goAdmin() {
+    montreModale.value = false;
+    router.push('/admin');
+}
+
+function AccueilOuAdmin() {
+    if (route.path === '/admin') {
+        router.push('/') // Redirige direct vers Accueil
+    } else {
+        montreModale.value = true // Ouvre la modale pour se connecter au pannel admin
+    }
 }
 
 </script>
@@ -15,33 +37,49 @@ function search() {
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <header>
-        <img alt="Logo Pharmacie ISIS" class="logo" src="../assets/logoo.png" width="150" height="150" />
-        
+        <img alt="Logo Pharmacie ISIS" class="logo" src="../assets/logo.png" width="150" height="150" />
         <div id="recherche">
-            
             <form @submit.prevent="$emit('recherche', Mrecherche)">
 
-                <input type="search" v-model="Mrecherche" placeholder="Ex : Paracétamol" autofocus required>
-                <i @click.prevent="search" class="fa fa-search"></i>
+                <input type="search" v-model="Mrecherche" placeholder="Ex : Paracétamol" autofocus>
+                <i @click.prevent="recherche" class="fa fa-search"></i>
             </form>
         </div>
-        <RouterLink to="/admin">Admin</RouterLink>
-
-
+<h3 @click="AccueilOuAdmin"><i :class="route.path === '/admin' ? 'fas fa-home' : 'fas fa-user-shield'"></i> {{ route.path === '/admin' ? 'Accueil' : 'Admin' }}</h3>        
     </header>
+    <ModaleConnexion :ModConOn="montreModale" @succes="goAdmin" @fermer="montreModale = false" />
 </template>
 <style scoped>
 #recherche p {
     transform: translate(0%, -120%);
 }
 
+h3 {
+    background: #031927;
+    color: #fff;
+    font-weight: bold;
+    padding: 0.5em 1.2em;
+    border: none;
+    border-radius: 22px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 2px 0px;
+    cursor: pointer;
+    font-size: 1em;
+    letter-spacing: 0.02em;
+}
 
+h3:hover {
+    border: 1px solid#031927 ;
+    color: #031927;
+    background-color: #e1edfd;
+
+}
 
 #recherche {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     margin-top: 50px;
+    min-width: 150px;
 
 }
 
@@ -81,7 +119,7 @@ input {
     top: 0;
     right: 0;
     border-radius: 4px;
-    color: #07051a;
+    color: #031927;
     text-align: center;
     font-size: 1.2em;
     transition: all 1s;
@@ -103,28 +141,13 @@ form:valid input {
 form:hover .fa,
 form:focus-within .fa,
 form:valid .fa {
-    background: #07051a;
+    background: #031927;
     color: white;
 }
 
-button {
-    display: none;
-    position: absolute;
-    top: 70px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    font-size: 20px;
-    color: white;
-    padding: 4px;
-    min-height: max-content;
-    background: transparent;
-    outline: 0;
-    border: 1px solid #303030;
-    border-radius: 4px;
-    text-align: center;
-    width: 100%;
-    cursor: pointer;
+
+.favorite {
+    display: block;
 }
 
 form:valid button {
@@ -134,15 +157,15 @@ form:valid button {
 header {
     line-height: 1.5;
     justify-content: space-between;
-    background-color: lightcyan;
+    background: linear-gradient(90deg, #e1edfd 0%, #70a3df 100%);
     border-radius: 10px;
     height: 80px;
     padding-inline: 20px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .logo {
     display: block;
-    margin: 0 auto 2rem;
 }
 
 @media (min-width: 1024px) {
@@ -151,9 +174,6 @@ header {
         place-items: center;
     }
 
-    .logo {
-        margin: 0 2rem 0 0;
-    }
 
     header .wrapper {
         display: flex;
