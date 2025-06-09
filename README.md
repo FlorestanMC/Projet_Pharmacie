@@ -77,7 +77,7 @@ Un bouton Supprimer pour retirer définitivement un médicament de la base.
 
 #### Sécurité & retours
 Modales et feedbacks clairs : messages de succès, erreurs ou confirmations.
-Accès restreint : seules les personnes authentifiées peuvent utiliser ces actions.
+Accès restreint : seules les personnes authentifiées peuvent utiliser ces actions. ( Via une variable localStorage )
 
 Aucun résultat ? Un message adapté s’affiche + bouton pour réinitialiser la recherche.
 
