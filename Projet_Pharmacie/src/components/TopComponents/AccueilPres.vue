@@ -8,7 +8,7 @@
             <button type="button">C'est parti !</button>
         </div>
 
-        <img src="../assets/Header-IMG-wBG.png" alt="">
+        <img src="../../assets/Header-IMG-wBG.png" alt="">
     </div>
 </template>
 <style scoped>

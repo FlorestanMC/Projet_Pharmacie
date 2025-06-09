@@ -1,18 +1,20 @@
 <script setup>
-import { Medicament } from "../medicament.js";
-import { onMounted, onBeforeUnmount, ref, watch } from "vue";
+import { Medicament } from "../../medicament.js"
+import { onMounted, onBeforeUnmount, ref, watch, defineEmits } from "vue";
 
 const url = "https://apipharmacie.pecatte.fr/api/11/medicaments";
 
 const search = "?search="
 
-const props = defineProps(["recherche"]);
+const props = defineProps(["recherche"],['reinitialiserRecherche']);
+
+const emit = defineEmits(['reinitialiserRecherche']);
 
 const photourl = "https://apipharmacie.pecatte.fr/images/";
 
 const listeMedicaments = ref([]);
 
-const showBackToTop = ref(false);
+const BackToTop = ref(false);
 
 function getMedicaments() {
     const fetchOptions = { method: "GET" };
@@ -31,15 +33,23 @@ function getMedicaments() {
         });
 }
 
+
 function checkScroll() {
-    showBackToTop.value = window.scrollY > 50;
+    BackToTop.value = window.scrollY > 100;
+
 }
 
 function scrollAuTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-watch(props, (newrecherche) => {
+function resetRecherche() {
+    emit('reinitialiserRecherche');
+    getMedicaments();
+    scrollAuTop();
+}   
+
+watch(props, () => {
     getMedicaments(props);
     document.querySelector('#med-container').scrollIntoView({
         behavior: 'smooth'
@@ -54,7 +64,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener('scroll', checkScroll);
+    window.removeEventListener('scroll', checkScroll);
 });
 
 </script>
@@ -79,33 +89,61 @@ onBeforeUnmount(() => {
             </div>
         </div>
 
-        <div v-for="medicament in listeMedicaments" :key="medicament.id" class="med-item">
-            <div class="band"></div>
-            <div class="med-infost" style="width: 200px;">
-                <p v-bind:value="medicament.id">{{ medicament.denomination }}</p>
-            </div>
-            <div class="med-info" style="width: 200px;">
-                <p v-bind:value="medicament.id">{{ medicament.quantite }}</p>
-            </div>
-            <div class="med-info" style="width: 200px;">
-                <p v-bind:value="medicament.id">{{ medicament.formepharmaceutique }}</p>
-            </div>
-            <div class="med-info" style="width: 200px;">
-                <img class="med-img" v-bind:src="photourl + medicament.photo">
+        <div class="trait"></div>
+
+        <div v-if="listeMedicaments.length === 0">
+            <br><br>
+            <p>Aucun médicament n'a été trouvé...</p>
+            <p class="reset" @click="resetRecherche">Réinitialiser la recherche ?</p>
+            <br><br>
+        </div>
+        <div v-else>
+            <div v-for="medicament in listeMedicaments" :key="medicament.id" class="med-item">
+                <div class="band"></div>
+                <div class="med-infost">
+                    <p v-bind:value="medicament.id">{{ medicament.denomination }}</p>
+                </div>
+                <div class="med-info" >
+                    <p v-bind:value="medicament.id">{{ medicament.qte }}</p>
+                </div>
+                <div class="med-info">
+                    <p v-bind:value="medicament.id">{{ medicament.formepharmaceutique }}</p>
+                </div>
+                <div class="med-info">
+                    <img class="med-img" v-bind:src="photourl + medicament.photo">
+                </div>
             </div>
         </div>
+
     </div>
 
-<button v-show="showBackToTop" @click="scrollAuTop" class="back-to-top" aria-label="Revenir en haut"> ▲ </button>
+    <button v-if="BackToTop" @click="scrollAuTop" class="back-to-top" aria-label="Revenir en haut">▲</button>
+
 
 </template>
 
 <style scoped>
 
+.reset {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    text-decoration: underline;
+    margin-inline: 40%;
+}
+
+.trait {
+    height: 1px;
+    background-color: #031927;
+    margin-inline: 10%;
+    margin-block: 1%;
+
+}
+
 .back-to-top {
     position: fixed;
-    right: 32px;
-    bottom: 32px;
+    bottom: 10px;
+    right: 155.6px;
     width: 48px;
     height: 48px;
     border: none;
@@ -166,6 +204,7 @@ onBeforeUnmount(() => {
     align-items: center;
     display: flex;
     justify-content: center;
+    width: 200px;
 }
 
 .med-infost {
@@ -176,6 +215,7 @@ onBeforeUnmount(() => {
     align-items: center;
     display: flex;
     justify-content: center;
+    width: 200px;
 }
 
 p {

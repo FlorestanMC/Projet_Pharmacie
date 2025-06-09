@@ -1,5 +1,5 @@
 <script setup>
-import AdminListeMedicaments from "../components/AdminListeMedicaments.vue";
+import AdminListeMedicaments from "./AdminListeMedicaments.vue"
 const props = defineProps(["recherche"]);
 
 
@@ -21,5 +21,6 @@ function handlerAdd(l) {
 </script>
 
 <template>
+    
     <AdminListeMedicaments :recherche="props.recherche" />
 </template>

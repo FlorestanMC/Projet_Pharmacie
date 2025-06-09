@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import PageAdmin from '../pages/PageAdmin.vue';
-import Accueil from '../components/Accueil.vue';
-import ModaleConnexion from '@/components/ModaleConnexion.vue';
+import Accueil from '../pages/PageAccueil.vue';
+import ModaleConnexion from '@/components/TopComponents/ModaleConnexion.vue';
 
 
 const router = createRouter({

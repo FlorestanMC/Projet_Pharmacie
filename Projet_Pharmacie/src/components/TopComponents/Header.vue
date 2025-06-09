@@ -1,9 +1,18 @@
 <script setup>
-import { RouterLink, useRoute, useRouter } from 'vue-router';
-import { ref } from 'vue';
-import ModaleConnexion from '../components/ModaleConnexion.vue'
+import { useRoute, useRouter } from 'vue-router';
+import { ref, watch} from 'vue';
+import ModaleConnexion from './ModaleConnexion.vue';
 
 const montreModale = ref(false);
+
+const props = defineProps(["reinitialiserRecherche"]);
+
+watch(props, () => {
+    if (props.reinitialiserRecherche) {
+        Mrecherche.value = "";
+        emit('recherche', Mrecherche.value);
+    }
+});
 
 const Mrecherche = defineModel();
 
@@ -12,7 +21,6 @@ const route = useRoute();
 const router = useRouter();
 
 const emit = defineEmits(['recherche'])
-
 
 function recherche() {
     emit('recherche', Mrecherche.value);
@@ -37,11 +45,11 @@ function AccueilOuAdmin() {
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <header>
-        <img alt="Logo Pharmacie ISIS" class="logo" src="../assets/logo.png" width="150" height="150" />
+        <img alt="Logo Pharmacie ISIS" class="logo" src="../../assets/logo.png" width="150" height="150" />
         <div id="recherche">
             <form @submit.prevent="$emit('recherche', Mrecherche)">
 
-                <input type="search" v-model="Mrecherche" placeholder="Ex : Paracétamol" autofocus>
+                <input type="search" v-model="Mrecherche" placeholder="Ex : Paracétamol" required autofocus>
                 <i @click.prevent="recherche" class="fa fa-search"></i>
             </form>
         </div>
@@ -145,6 +153,11 @@ form:valid .fa {
     color: white;
 }
 
+form:hover .fa:hover {
+    color: #031927;
+     background-color: #e1edfd;
+    border: 1px solid #031927;
+}
 
 .favorite {
     display: block;
